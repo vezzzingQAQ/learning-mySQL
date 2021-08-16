@@ -1,0 +1,151 @@
+Microsoft Windows [版本 10.0.19042.1110]
+(c) Microsoft Corporation。保留所有权利。
+
+C:\Users\19329>mysql
+ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+C:\Users\19329>mysqld
+
+C:\Users\19329>mysqld --console
+2021-08-16T13:29:09.506073Z 0 [System] [MY-010116] [Server] D:\softWares\mySQL\mysql-8.0.22-winx64\mysql-8.0.22-winx64\bin\mysqld.exe (mysqld 8.0.22) starting as process 39864
+2021-08-16T13:29:09.549996Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-08-16T13:29:10.261381Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-08-16T13:29:10.485642Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2021-08-16T13:29:10.510581Z 0 [System] [MY-010229] [Server] Starting XA crash recovery...
+2021-08-16T13:29:10.515073Z 0 [System] [MY-010232] [Server] XA crash recovery finished.
+2021-08-16T13:29:10.557577Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2021-08-16T13:29:10.557987Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2021-08-16T13:29:10.589660Z 0 [System] [MY-010931] [Server] D:\softWares\mySQL\mysql-8.0.22-winx64\mysql-8.0.22-winx64\bin\mysqld.exe: ready for connections. Version: '8.0.22'  socket: ''  port: 3306  MySQL Community Server - GPL.
+2021-08-16T13:30:01.186239Z 0 [System] [MY-013105] [Server] D:\softWares\mySQL\mysql-8.0.22-winx64\mysql-8.0.22-winx64\bin\mysqld.exe: Normal shutdown.
+^C
+C:\Users\19329>
+C:\Users\19329>2021-08-16T13:30:02.051500Z 0 [System] [MY-010910] [Server] D:\softWares\mySQL\mysql-8.0.22-winx64\mysql-8.0.22-winx64\bin\mysqld.exe: Shutdown complete (mysqld 8.0.22)  MySQL Community Server - GPL.
+quit
+'quit' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+C:\Users\19329>mysqladmin -uroot shutdown
+mysqladmin: connect to server at 'localhost' failed
+error: 'Can't connect to MySQL server on 'localhost' (10061)'
+Check that mysqld is running on localhost and that the port is 3306.
+You can check this by doing 'telnet localhost 3306'
+
+C:\Users\19329>telnet localhost 3306
+'telnet' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+C:\Users\19329>mysql> SHOW DATABASES;
+ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+C:\Users\19329>mysql -u root -p
+Enter password: ****
+ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+C:\Users\19329>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES
+    -> ^C
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydemo             |
+| mysql              |
+| performance_schema |
+| sys                |
+| userscrud          |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> SHOW DATABASES;
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+ERROR:
+Can't connect to the server
+
+mysql>  SHOW DATABASES;
+No connection. Trying to reconnect...
+Connection id:    8
+Current database: *** NONE ***
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydemo             |
+| mysql              |
+| performance_schema |
+| sys                |
+| userscrud          |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use mydemo
+Database changed
+mysql> SHOW TABLES;
++----------------------------+
+| Tables_in_mydemo           |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| myapp_users                |
+| stu                        |
++----------------------------+
+12 rows in set (0.01 sec)
+
+mysql> SHOW INDEX FROM mydemo;
+ERROR 1146 (42S02): Table 'mydemo.mydemo' doesn't exist
+mysql> SHOW INDEX FROM stu;
+Empty set (0.00 sec)
+
+mysql> use userscrud;
+Database changed
+mysql> SHOW TABLES;
++----------------------------+
+| Tables_in_userscrud        |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| myapp_users                |
++----------------------------+
+11 rows in set (0.00 sec)
+
+mysql> SHOW INDEX FROM myapp_users;
++-------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table       | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| myapp_users |          0 | PRIMARY  |            1 | id          | A         |           0 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++-------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+1 row in set (0.00 sec)
+
+mysql>
